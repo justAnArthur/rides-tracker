@@ -4,8 +4,8 @@ import pluginAPI from "vite-plugin-api"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    pluginAPI({}),
-  ],
+	plugins: [
+		react(),
+		pluginAPI({}),
+	],
 })

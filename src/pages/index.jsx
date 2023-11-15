@@ -1,16 +1,7 @@
-import { useEffect, useState } from "react"
-
 export default () => {
-	const [data, setData] = useState(null)
+	fetch('/api/user')
+		.then(res => res.json())
+		.then(data => console.log(data))
 
-	useEffect(() => {
-		fetch('/api')
-			.then(res => res.text())
-			.then(setData);
-	}, [])
-
-	if (!data)
-		return 'loading'
-
-	return data
+	return 'dashboard'
 }

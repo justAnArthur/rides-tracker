@@ -49,6 +49,18 @@ export const Form = ({ apiPath, fields, createFields }) => {
 		_setData(prev => [...prev, data])
 	}
 
+	function onDelete(id) {
+		fetch(apiPath, {
+			method: 'DELETE',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ id })
+		})
+			.then(res => {
+				if (res.status === 200)
+					_setData(prev => prev.filter(({ id: _id }) => _id !== id))
+			})
+	}
+
 	return <section>
 		<Create {...{ apiPath, fields: createFields, onSubmitData }}/>
 		<table>
@@ -73,6 +85,11 @@ export const Form = ({ apiPath, fields, createFields }) => {
 								: <Field value={type[Field.originalName]}/>
 						}</td>
 					))}
+					<td>
+						<button type="button" onClick={() => onDelete(type.id)}>
+							❌
+						</button>
+					</td>
 				</tr>
 			))}
 			</tbody>

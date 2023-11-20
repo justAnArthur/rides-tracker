@@ -25,7 +25,7 @@ const LogoutButton = () => {
 
 export default ({ children }) => {
 	return <div className="p-6 w-full h-screen bg-gray-100 flex flex-col gap-6">
-		<header className="flex justify-between p-4 rounded-xl bg-white">
+		<header className="flex justify-between rounded-xl bg-white">
 			react-rides-tracker
 			<LogoutButton/>
 		</header>

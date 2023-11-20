@@ -2,7 +2,8 @@
 // Imports
 import * as _0_0 from "/V:/justAnArthur/university/VAVJS/assignments/03 react-rides-tracker/src/api/auth/login.js";
 import * as _0_1 from "/V:/justAnArthur/university/VAVJS/assignments/03 react-rides-tracker/src/api/auth/register.js";
-import * as _0_2 from "/V:/justAnArthur/university/VAVJS/assignments/03 react-rides-tracker/src/api/user.js";
+import * as _0_2 from "/V:/justAnArthur/university/VAVJS/assignments/03 react-rides-tracker/src/api/ride/[kind].js";
+import * as _0_3 from "/V:/justAnArthur/university/VAVJS/assignments/03 react-rides-tracker/src/api/user.js";
 
 
 export const routeBase = "/api";
@@ -105,52 +106,100 @@ const internal  = [
         cb         : _0_1.DELETE,
       },
   _0_2.default && {
+        source     : "src/api/ride/[kind].js?fn=default",
+        method     : "use",
+        route      : "/ride/:kind",
+        path       : "/api/ride/:kind",
+        url        : "/api/ride/:kind",
+        cb         : _0_2.default,
+      },
+  _0_2.GET && {
+        source     : "src/api/ride/[kind].js?fn=GET",
+        method     : "get",
+        route      : "/ride/:kind",
+        path       : "/api/ride/:kind",
+        url        : "/api/ride/:kind",
+        cb         : _0_2.GET,
+      },
+  _0_2.PUT && {
+        source     : "src/api/ride/[kind].js?fn=PUT",
+        method     : "put",
+        route      : "/ride/:kind",
+        path       : "/api/ride/:kind",
+        url        : "/api/ride/:kind",
+        cb         : _0_2.PUT,
+      },
+  _0_2.POST && {
+        source     : "src/api/ride/[kind].js?fn=POST",
+        method     : "post",
+        route      : "/ride/:kind",
+        path       : "/api/ride/:kind",
+        url        : "/api/ride/:kind",
+        cb         : _0_2.POST,
+      },
+  _0_2.PATCH && {
+        source     : "src/api/ride/[kind].js?fn=PATCH",
+        method     : "patch",
+        route      : "/ride/:kind",
+        path       : "/api/ride/:kind",
+        url        : "/api/ride/:kind",
+        cb         : _0_2.PATCH,
+      },
+  _0_2.DELETE && {
+        source     : "src/api/ride/[kind].js?fn=DELETE",
+        method     : "delete",
+        route      : "/ride/:kind",
+        path       : "/api/ride/:kind",
+        url        : "/api/ride/:kind",
+        cb         : _0_2.DELETE,
+      },
+  _0_3.default && {
         source     : "src/api/user.js?fn=default",
         method     : "use",
         route      : "/user",
         path       : "/api/user",
         url        : "/api/user",
-        cb         : _0_2.default,
+        cb         : _0_3.default,
       },
-  _0_2.GET && {
+  _0_3.GET && {
         source     : "src/api/user.js?fn=GET",
         method     : "get",
         route      : "/user",
         path       : "/api/user",
         url        : "/api/user",
-        cb         : _0_2.GET,
+        cb         : _0_3.GET,
       },
-  _0_2.PUT && {
+  _0_3.PUT && {
         source     : "src/api/user.js?fn=PUT",
         method     : "put",
         route      : "/user",
         path       : "/api/user",
         url        : "/api/user",
-        cb         : _0_2.PUT,
+        cb         : _0_3.PUT,
       },
-  _0_2.POST && {
+  _0_3.POST && {
         source     : "src/api/user.js?fn=POST",
         method     : "post",
         route      : "/user",
         path       : "/api/user",
         url        : "/api/user",
-        cb         : _0_2.POST,
+        cb         : _0_3.POST,
       },
-  _0_2.PATCH && {
+  _0_3.PATCH && {
         source     : "src/api/user.js?fn=PATCH",
         method     : "patch",
         route      : "/user",
         path       : "/api/user",
         url        : "/api/user",
-        cb         : _0_2.PATCH,
+        cb         : _0_3.PATCH,
       },
-  _0_2.DELETE && {
+  _0_3.DELETE && {
         source     : "src/api/user.js?fn=DELETE",
         method     : "delete",
         route      : "/user",
         path       : "/api/user",
         url        : "/api/user",
-        cb         : _0_2.DELETE,
+        cb         : _0_3.DELETE,
       }
 ].filter(it => it);
 

@@ -1,0 +1,2 @@
+GET localhost:5173/api/ride/usage
+Content-Type: application/json

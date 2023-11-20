@@ -13,6 +13,7 @@ export async function authMiddleware(req, res, next) {
 
 		next()
 	} catch (error) {
+		console.warn(error)
 		res.status(401).send("unauthorized")
 	}
 }

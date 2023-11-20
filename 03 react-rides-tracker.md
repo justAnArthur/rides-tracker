@@ -1,3 +1,7 @@
+- [ ] 📅 2023-11-27
+
+---
+
 # Podmienky hodnotenia !!!
 1. Projekt musi byt spustitelny cez "docker-compose build" a "docker-compose up" !!!!! V opacnom pripade bude projekt hodnoteny celkovo 0 bodmi.
 2. Pokial po zadani prikazov z bodu 1. nebude odpoved na http://localhost:8080 a vsetka komunikacia na server nebude prebiehat len na porte 8080 projekt bude hodnoteny celkovo 0 bodmi.

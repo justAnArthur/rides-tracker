@@ -38,6 +38,61 @@ User.init({
 	age: DataTypes.INTEGER,
 }, { sequelize, modelName: 'user' })
 
+const Type = sequelize.define("type", {
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true,
+	},
+	name: DataTypes.STRING,
+})
+
+Type.belongsTo(User)
+User.hasMany(Type)
+
+const RideKm = sequelize.define("ride_km", {
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true,
+	},
+	value: DataTypes.INTEGER,
+})
+
+
+RideKm.belongsTo(Type)
+Type.hasMany(RideKm)
+RideKm.belongsTo(User)
+User.hasMany(RideKm)
+
+const RideTime = sequelize.define("ride_time", {
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true,
+	},
+	value: DataTypes.INTEGER,
+})
+
+RideTime.belongsTo(Type)
+Type.hasMany(RideTime)
+RideTime.belongsTo(User)
+User.hasMany(RideTime)
+
+const RideUsage = sequelize.define("ride_usage", {
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true,
+	},
+	value: DataTypes.INTEGER,
+})
+
+RideUsage.belongsTo(Type)
+Type.hasMany(RideUsage)
+RideUsage.belongsTo(User)
+User.hasMany(RideUsage)
+
 await sequelize.sync()
 
-export { User }
+export { User, Type, RideKm, RideTime, RideUsage }

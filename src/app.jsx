@@ -6,22 +6,37 @@ const pages = import.meta.glob("./pages/**/*.jsx", { eager: true })
 
 const routes = []
 for (const path of Object.keys(pages)) {
-	const fileName = path.match(/\.\/pages\/(.*)\.jsx$/)?.[1]
+	const normalizedPathName = path.match(/\.\/pages\/(.*)\.jsx$/)?.[1]
+
+	const fileName = normalizedPathName?.split("/").pop()
 
 	if (!fileName || fileName.startsWith("_"))
 		continue
 
-	const normalizedPathName = fileName.includes("$")
-		? fileName.replace("$", ":")
-		: fileName.replace(/\/index/, "")
+	if (fileName[0] === '[' && fileName[fileName.length - 1] === ']' && pages[path]?.pathParams) {
+		const params = fileName.slice(1, -1).split(",").map(param => param.trim())
+
+		if (!params || !Array.isArray(params) || params.length === 0)
+			continue
+
+		for (const param of params) {
+			const Element = pages[path].default
+
+			routes.push({
+				path: `/${normalizedPathName.split("/").slice(0, -1).join("/").toLowerCase()}/${param}`,
+				Element: () => <Element {...{ param }}/>,
+				...pages[path]
+			})
+		}
+		continue
+	}
 
 	routes.push({
-		path: fileName === "index" ? "/" : `/${normalizedPathName.toLowerCase()}`,
+		path: fileName === "index"
+			? `/${normalizedPathName.split("/").slice(0, -1).join("/")}`
+			: `/${normalizedPathName.toLowerCase()}`,
 		Element: pages[path].default,
-		loader: pages[path]?.loader,
-		action: pages[path]?.action,
-		asPublic: pages[path]?.asPublic,
-		ErrorBoundary: pages[path]?.ErrorBoundary,
+		...pages[path]
 	})
 }
 
@@ -36,6 +51,7 @@ const router = createBrowserRouter(
 		...(ErrorBoundary && { errorElement: <ErrorBoundary/> }),
 	}))
 )
+2
 
 export default function App() {
 	return <Layout>

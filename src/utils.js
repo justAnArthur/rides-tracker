@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
 export function getCookie(name) {
 	return document.cookie
 		.split("; ")
 		.find((row) => row.startsWith(name + "="))
-		?.split("=")[1];
+		?.split("=")[1]
 }
 
-export function useForm({ onSubmit }) {
-	const [formState, setFormState] = useState({})
+export function useForm({ onSubmit, defaultValues }) {
+	const [formState, setFormState] = useState(defaultValues || {})
 	const [error, setError] = useState(null)
 
 	function handleChange(event) {
@@ -39,7 +39,7 @@ export function useData(url, options) {
 
 	useEffect(() => {
 		setLoading(true)
-		fetch(url, {
+		url && fetch(url, {
 			headers: {
 				'Content-Type': 'application/json',
 				'Accept': 'application/json',
@@ -58,4 +58,31 @@ export function useData(url, options) {
 	}, [url, JSON.stringify(options)])
 
 	return { data, _setData: setData, loading, error }
+}
+
+export function formatDate(date) {
+	let d = new Date(date),
+		month = '' + (d.getMonth() + 1),
+		day = '' + d.getDate(),
+		year = d.getFullYear()
+
+	if (month.length < 2)
+		month = '0' + month
+	if (day.length < 2)
+		day = '0' + day
+
+	return [year, month, day].join('-')
+}
+
+export function generateDateRange(startDate, endDate) {
+	let start = new Date(startDate)
+	let end = new Date(endDate)
+	let datesArray = []
+
+	while (start <= end) {
+		datesArray.push(formatDate(start))
+		start.setDate(start.getDate() + 1)
+	}
+
+	return datesArray
 }

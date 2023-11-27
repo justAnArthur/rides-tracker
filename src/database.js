@@ -1,7 +1,11 @@
 import { DataTypes, Model, Sequelize } from 'sequelize'
 import bcrypt from 'bcrypt'
 
-const sequelize = new Sequelize('postgresql://localhost:5432/vavjs/react-rides-tracker')
+const sequelize = new Sequelize('vavjs/react-rides-tracker', 'postgres', '', {
+	host: 'db',
+	port: 5432,
+	dialect: 'postgres',
+})
 
 class User extends Model {
 	validPassword(password) {
@@ -19,9 +23,9 @@ User.init({
 		type: DataTypes.STRING,
 		allowNull: false,
 		unique: true,
-		validate: {
+		/*validate: {
 			isEmail: true,
-		}
+		}*/
 	},
 	name: {
 		type: DataTypes.STRING,
@@ -36,6 +40,10 @@ User.init({
 		allowNull: false,
 	},
 	age: DataTypes.INTEGER,
+	admin: {
+		type: DataTypes.BOOLEAN,
+		defaultValue: false,
+	},
 }, { sequelize, modelName: 'user' })
 
 const Type = sequelize.define("type", {
@@ -57,6 +65,12 @@ const RideKm = sequelize.define("ride_km", {
 		primaryKey: true,
 	},
 	value: DataTypes.INTEGER,
+}, {
+	defaultScope: {
+		attributes: {
+			exclude: ['userId']
+		}
+	}
 })
 
 
@@ -72,6 +86,12 @@ const RideTime = sequelize.define("ride_time", {
 		primaryKey: true,
 	},
 	value: DataTypes.INTEGER,
+}, {
+	defaultScope: {
+		attributes: {
+			exclude: ['userId']
+		}
+	}
 })
 
 RideTime.belongsTo(Type)
@@ -86,6 +106,12 @@ const RideUsage = sequelize.define("ride_usage", {
 		primaryKey: true,
 	},
 	value: DataTypes.INTEGER,
+}, {
+	defaultScope: {
+		attributes: {
+			exclude: ['userId']
+		}
+	}
 })
 
 RideUsage.belongsTo(Type)
@@ -93,6 +119,42 @@ Type.hasMany(RideUsage)
 RideUsage.belongsTo(User)
 User.hasMany(RideUsage)
 
-await sequelize.sync()
+const Advertisement = sequelize.define("advertisement", {
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true,
+	},
+	name: DataTypes.STRING,
+	link: {
+		type: DataTypes.STRING,
+		validate: {
+			isUrl: true,
+		}
+	},
+	image: {
+		type: DataTypes.STRING,
+		validate: {
+			isUrl: true,
+		}
+	},
+	counter: {
+		type: DataTypes.INTEGER,
+		defaultValue: 0
+	},
+})
 
-export { User, Type, RideKm, RideTime, RideUsage }
+await sequelize.sync({ force: true })
+
+// creating admin
+await User.findOrCreate({
+	where: { email: 'admin' },
+	defaults: {
+		email: 'admin',
+		name: 'admin',
+		password: 'admin',
+		admin: true,
+	}
+})
+
+export { User, Type, RideKm, RideTime, RideUsage, Advertisement, sequelize }

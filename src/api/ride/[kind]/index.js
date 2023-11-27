@@ -1,5 +1,5 @@
-import { authMiddleware } from "../../server/auth.js";
-import { RideKm, RideTime, RideUsage, Type, User } from "../../database.js";
+import { authMiddleware } from "../../../server/auth.js";
+import { RideKm, RideTime, RideUsage, Type, User } from "../../../database.js";
 
 const kinds = {
 	km: RideKm,

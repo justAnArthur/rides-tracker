@@ -48,6 +48,7 @@ export default function Ride({ param }) {
 			apiPath: `/api/ride/${param}`,
 			fields: ['createdAt', 'value', TypeLabel],
 			createFields: ['value', TypeInput],
+			importKeys: ['id', 'value', 'typeId', 'createdAt', 'updatedAt', 'userId']
 		}}/>
 	</TypeProvider>
 }

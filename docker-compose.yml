@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16.0
+    environment:
+      POSTGRES_DB: vavjs/react-rides-tracker
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  vite:
+    build: .
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+  test:
+    build: .
+    depends_on:
+      - db
+      - vite
+    command: npm run test
+
+volumes:
+  db_data: { }

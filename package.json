@@ -4,21 +4,24 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "mocha"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "chart.js": "^4.4.0",
     "express": "^4.18.2",
+    "mocha": "^10.2.0",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.18.0",
     "sequelize": "^6.35.0",
-    "sqlite3": "^5.1.6",
     "vite-plugin-api": "^1.0.4"
   },
   "devDependencies": {

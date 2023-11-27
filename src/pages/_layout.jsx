@@ -1,7 +1,7 @@
 import { getCookie } from "../utils.js";
+import { Advertisement } from "../components/Advertisement.jsx";
 
 const LogoutButton = () => {
-
 	const user = getCookie('user')
 
 	function handleLogout() {
@@ -22,13 +22,13 @@ const LogoutButton = () => {
 		</span>
 }
 
-
-export default ({ children }) => {
-	return <div className="p-6 w-full h-screen bg-gray-100 flex flex-col gap-6">
-		<header className="flex justify-between rounded-xl bg-white">
-			react-rides-tracker
+export default function Layout({ children }) {
+	return <div>
+		<header>
+			react-rides-tracker{' '}
 			<LogoutButton/>
 		</header>
 		{children}
+		<Advertisement/>
 	</div>
 }

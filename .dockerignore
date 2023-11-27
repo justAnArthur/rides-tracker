@@ -1,0 +1,8 @@
+node_modules
+package-lock.json
+.eslintrc.cjs
+.gitignore
+api.http
+yarn.lock
+.api
+dist

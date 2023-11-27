@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { getCookie, useForm } from "../utils.js";
 
-export default () => {
-
+export default function Login() {
 	const { handleChange, error, handleSubmit } = useForm({ onSubmit })
 
 	useEffect(() => {
@@ -25,18 +24,19 @@ export default () => {
 			})
 	}
 
-	return <main className="rounded-xl bg-white grid place-content-center">
-		<form onSubmit={handleSubmit} className="grid gap-3 max-w-xs">
+	return <main>
+		<form onSubmit={handleSubmit}>
 			<label>
 				email
-				<input name="email" type="email" onChange={handleChange} required/>
+				{/*type="email "这个该死的 "admin "怎么会是电子邮件？*/}
+				<input name="email" type="text" onChange={handleChange} required/>
 			</label>
 			<label>
 				password
 				<input name="password" type="password" onChange={handleChange} required/>
 			</label>
 			<button type="submit">login</button>
-			{error && <p className="text-red-500">{error}</p>}
+			{error && <p>{error}</p>}
 		</form>
 	</main>
 }

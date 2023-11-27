@@ -1,5 +1,68 @@
 import { useData, useForm } from "../utils.js";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+
+const Import = ({ apiPath, keys }) => {
+
+	const [result, setResult] = useState(null)
+
+	const handleFileRead = (event) => {
+		const reader = new FileReader()
+
+		reader.onloadend = (evt) => {
+			if (evt.target.readyState === FileReader.DONE) {
+				const lines = evt.target.result.split('\n').map(line => line.split(','))
+
+				const _keys = lines[0]
+
+				const data = lines.slice(1)
+
+				if (_keys.every(item => keys.includes(item)) && keys.every(item => _keys.includes(item))) {
+					Promise.all(data.map(values =>
+						fetch(apiPath, {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/json' },
+							body: JSON.stringify(_keys.reduce((prev, current, index) => ({ ...prev, [current]: values[index] }), {}))
+						})))
+						.then(() => location.reload())
+				} else
+					setResult('csv file dont related to schema')
+			}
+		}
+
+		reader.readAsText(event.target.files[0])
+	}
+
+	return <div>
+		<label>
+			import file
+			<input type="file" name="file" accept=".csv" onChange={handleFileRead}/>
+		</label>
+		{result}
+	</div>
+}
+
+function convertToCsv(keys, records) {
+	const csvRecords = [keys, ...records.map(record => keys.map(key => record[key]))]
+
+	return csvRecords.map(it => it.join(",")).join("\n")
+}
+
+export const Export = ({ data }) => {
+	const exportUrl = useMemo(() => {
+		if(!data || !Array.isArray(data))
+			return
+
+		const csv = convertToCsv(Object.keys(data[0]), data)
+		const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+		return URL.createObjectURL(blob)
+	}, [data?.length])
+
+	return <span>
+		{exportUrl && <a href={exportUrl} download="export.csv">
+			export
+		</a>}
+	</span>
+}
 
 const Create = ({ apiPath, fields, onSubmitData }) => {
 	const { handleChange, error, handleSubmit } = useForm({ onSubmit })
@@ -32,11 +95,11 @@ const Create = ({ apiPath, fields, onSubmitData }) => {
 	return <form onSubmit={handleSubmit}>
 		{domFields}
 		<button type="submit">submit</button>
-		{error && <p className="text-red-500">{error}</p>}
+		{error && <p>{error}</p>}
 	</form>
 }
 
-export const Form = ({ apiPath, fields, createFields }) => {
+export const Form = ({ apiPath, fields, createFields, importKeys }) => {
 	const { data, loading, error, _setData } = useData(apiPath)
 
 	if (loading)
@@ -62,7 +125,15 @@ export const Form = ({ apiPath, fields, createFields }) => {
 	}
 
 	return <section>
-		<Create {...{ apiPath, fields: createFields, onSubmitData }}/>
+		{createFields &&
+			<Create {...{ apiPath, fields: createFields, onSubmitData }}/>}
+
+		{data?.length > 0 &&
+			<Export {...{ data }}/>}
+
+		{importKeys &&
+			<Import {...{ apiPath, keys: importKeys }} />}
+
 		<table>
 			<thead>
 			<tr>

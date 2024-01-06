@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useData, useForm } from "../utils.js";
 import {
 	CategoryScale,
@@ -155,4 +156,8 @@ export default function Dashboard() {
 		return <AdminDashboard/>
 
 	return <UserDashboard/>
+=======
+export default () => {
+	return 'dashboard'
+>>>>>>> 16da994 (- files)
 }

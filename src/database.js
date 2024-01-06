@@ -1,11 +1,15 @@
 import { DataTypes, Model, Sequelize } from 'sequelize'
 import bcrypt from 'bcrypt'
 
+<<<<<<< HEAD
 const sequelize = new Sequelize('vavjs/react-rides-tracker', 'postgres', '', {
 	host: 'db',
 	port: 5432,
 	dialect: 'postgres',
 })
+=======
+const sequelize = new Sequelize('postgresql://localhost:5432/vavjs/react-rides-tracker')
+>>>>>>> 16da994 (- files)
 
 class User extends Model {
 	validPassword(password) {
@@ -65,12 +69,15 @@ const RideKm = sequelize.define("ride_km", {
 		primaryKey: true,
 	},
 	value: DataTypes.INTEGER,
+<<<<<<< HEAD
 }, {
 	defaultScope: {
 		attributes: {
 			exclude: ['userId']
 		}
 	}
+=======
+>>>>>>> 16da994 (- files)
 })
 
 
@@ -86,12 +93,15 @@ const RideTime = sequelize.define("ride_time", {
 		primaryKey: true,
 	},
 	value: DataTypes.INTEGER,
+<<<<<<< HEAD
 }, {
 	defaultScope: {
 		attributes: {
 			exclude: ['userId']
 		}
 	}
+=======
+>>>>>>> 16da994 (- files)
 })
 
 RideTime.belongsTo(Type)
@@ -106,12 +116,15 @@ const RideUsage = sequelize.define("ride_usage", {
 		primaryKey: true,
 	},
 	value: DataTypes.INTEGER,
+<<<<<<< HEAD
 }, {
 	defaultScope: {
 		attributes: {
 			exclude: ['userId']
 		}
 	}
+=======
+>>>>>>> 16da994 (- files)
 })
 
 RideUsage.belongsTo(Type)
@@ -138,6 +151,7 @@ const Advertisement = sequelize.define("advertisement", {
 			isUrl: true,
 		}
 	},
+<<<<<<< HEAD
 	counter: {
 		type: DataTypes.INTEGER,
 		defaultValue: 0
@@ -145,6 +159,11 @@ const Advertisement = sequelize.define("advertisement", {
 })
 
 await sequelize.sync({ force: true })
+=======
+})
+
+await sequelize.sync()
+>>>>>>> 16da994 (- files)
 
 // creating admin
 await User.findOrCreate({

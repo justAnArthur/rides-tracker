@@ -1,7 +1,12 @@
 import { useEffect } from "react";
 import { getCookie, useForm } from "../utils.js";
 
+<<<<<<< HEAD
 export default function Register() {
+=======
+export default () => {
+
+>>>>>>> 16da994 (- files)
 	const { handleChange, error, handleSubmit } = useForm({ onSubmit })
 
 	useEffect(() => {
@@ -24,8 +29,13 @@ export default function Register() {
 			})
 	}
 
+<<<<<<< HEAD
 	return <main>
 		<form onSubmit={handleSubmit}>
+=======
+	return <main className="rounded-xl bg-white grid place-content-center">
+		<form onSubmit={handleSubmit} className="grid gap-3 max-w-xs">
+>>>>>>> 16da994 (- files)
 			<label>
 				email
 				<input name="email" type="text" onChange={handleChange} required/>
@@ -47,7 +57,11 @@ export default function Register() {
 				<input name="_password" type="password" onChange={handleChange} required/>
 			</label>
 			<button type="submit">register</button>
+<<<<<<< HEAD
 			{error && <p>{error}</p>}
+=======
+			{error && <p className="text-red-500">{error}</p>}
+>>>>>>> 16da994 (- files)
 		</form>
 	</main>
 }

@@ -1,26 +1,14 @@
-<<<<<<< HEAD
 import { useEffect, useState } from "react"
-=======
-import { useEffect, useState } from "react";
->>>>>>> 16da994 (- files)
 
 export function getCookie(name) {
 	return document.cookie
 		.split("; ")
 		.find((row) => row.startsWith(name + "="))
-<<<<<<< HEAD
 		?.split("=")[1]
 }
 
 export function useForm({ onSubmit, defaultValues }) {
 	const [formState, setFormState] = useState(defaultValues || {})
-=======
-		?.split("=")[1];
-}
-
-export function useForm({ onSubmit }) {
-	const [formState, setFormState] = useState({})
->>>>>>> 16da994 (- files)
 	const [error, setError] = useState(null)
 
 	function handleChange(event) {
@@ -51,11 +39,7 @@ export function useData(url, options) {
 
 	useEffect(() => {
 		setLoading(true)
-<<<<<<< HEAD
 		url && fetch(url, {
-=======
-		fetch(url, {
->>>>>>> 16da994 (- files)
 			headers: {
 				'Content-Type': 'application/json',
 				'Accept': 'application/json',
@@ -74,7 +58,6 @@ export function useData(url, options) {
 	}, [url, JSON.stringify(options)])
 
 	return { data, _setData: setData, loading, error }
-<<<<<<< HEAD
 }
 
 export function formatDate(date) {
@@ -102,6 +85,4 @@ export function generateDateRange(startDate, endDate) {
 	}
 
 	return datesArray
-=======
->>>>>>> 16da994 (- files)
 }

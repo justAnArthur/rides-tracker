@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import { getCookie } from "../utils.js";
 import { Advertisement } from "../components/Advertisement.jsx";
-=======
 import { getCookie, useData } from "../utils.js";
->>>>>>> 16da994 (- files)
 
 const LogoutButton = () => {
 	const user = getCookie('user')
@@ -26,24 +22,10 @@ const LogoutButton = () => {
 		</span>
 }
 
-<<<<<<< HEAD
 export default function Layout({ children }) {
 	return <div>
 		<header>
 			react-rides-tracker{' '}
-=======
-const Advertisement = () => {
-	const { data } = useData('/api/user/me')
-
-	return JSON.stringify(data)
-}
-
-
-export default function Layout({ children }) {
-	return <div className="p-6 w-full h-screen bg-gray-100 flex flex-col gap-6">
-		<header className="flex justify-between rounded-xl bg-white">
-			react-rides-tracker
->>>>>>> 16da994 (- files)
 			<LogoutButton/>
 		</header>
 		{children}
